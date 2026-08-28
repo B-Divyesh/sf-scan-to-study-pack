@@ -1,0 +1,23 @@
+{
+  "name": "scan-to-study-pack",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build && node scripts/build-sw.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^5.4.296",
+    "tesseract.js": "^6.0.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@types/node": "^22.15.3",
+    "playwright": "1.58.2",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.0"
+  }
+}
