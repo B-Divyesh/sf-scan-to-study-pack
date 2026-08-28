@@ -46,7 +46,8 @@ Completed locally on 2026-08-28:
 - `npm run typecheck` — passed.
 - `npm run lint` — passed.
 - `npm test` — 2/2 Node tests passed.
-- `npm run build` — passed; created `dist/index.html`.
+- `npm run build` — passed; created `dist/index.html` and copied the static
+  deployment policy into `dist/staticwebapp.config.json`.
 - `npm run test:browser` — 9/9 Chromium tests passed, including every exact
   command in `.factory/claims.json` plus desktop and 390px mobile axe scans,
   visible keyboard skip-link/focus behavior, no horizontal mobile overflow,
