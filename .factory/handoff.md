@@ -1,36 +1,21 @@
-# Handoff — release-blocking QA repair
+# Handoff — independent verification 2: **FAIL**
 
-**Base candidate:** `1fc7e1f39f45005765f758e5a4d1544c9a8a13fa`
-**Verifier report repaired:** `.factory/verification.md`
+**Candidate:** `d76f14af80216708680e07bc793828663045ca66`
+**Live URL:** https://scan-to-study-pack.sociobot.in
 **Artifact:** static Vite TypeScript PWA (`dist/`)
 
-## What changed
+## Unambiguous release result
 
-- Added a one-click `/demo` with a realistic history-seminar source note,
-  editable recovered text, an amber low-confidence block, persistent demo
-  banner, **Reset demo**, and **Start for real**. Demo storage is isolated in
-  IndexedDB `scan-study-pack-demo-v1` at `demo:current`; real packs use
-  `scan-study-pack-v1` at `real:current`.
-- Rewrote the first screen for the stated job and audience, with the required
-  visible sample action. Added demo, claim, and copy-audit documentation.
-- Restored the latest real recovered pack on bootstrap. It keeps source-page
-  previews and text; the user must reselect the original file to run OCR again.
-- Added low-confidence OCR block presentation when Tesseract returns block
-  data, while retaining the existing page-level confidence summary.
-- Updated `pdfjs-dist` to `6.2.108` and synchronized `public/pdf.worker.mjs`.
-  `npm audit --omit=dev --audit-level=high` now reports **0 vulnerabilities**.
-- Added versioned service-worker cache names, old-cache cleanup, cache-first
-  app-shell assets, `/demo` pre-caching, and an update toast path.
-- Added `staticwebapp.config.json` with CSP, frame/permissions/referrer policy,
-  immutable cache rules for hashed/static runtime assets, and an explicit HTTP
-  404. `/demo` is emitted as a real static route, so no SPA fallback masks a
-  missing route.
-  Added robots, sitemap, canonical and social metadata, a 1200×630 original-art
-  derived social card, and `public/404.html`.
+**FAIL — do not release this candidate.**
 
-## Verification evidence
+The clean local quality gates and all listed claim commands pass, and the live
+deployment matches the candidate bytes checked. However, deployed CSP blocks
+the blob fetch used by Tesseract, so a normal user-uploaded scan cannot finish
+OCR. After service-worker activation, `/privacy/` and `/terms/` are also served
+the app shell and rendered as the client 404; missing URLs likewise become
+HTTP 200. These are release-blocking production defects.
 
-Run from a clean checkout with Node 22+:
+## What was verified
 
 ```bash
 npm ci
@@ -42,44 +27,24 @@ npm run test:browser
 npm audit --omit=dev --audit-level=high
 ```
 
-Completed locally on 2026-08-28:
+All passed locally (unit 2/2; browser 9/9; audit 0 vulnerabilities). Each
+exact claim command from `.factory/claims.json` was also rerun individually
+against the built demo entry point and passed. Live demo offline reload,
+same-origin demo request log, desktop/390px axe serious/critical scan,
+keyboard skip link, reduced motion, headers, bundle budget, response caching,
+build identity, and Sociobot verification rate limiting were checked.
 
-- `npm ci` — clean install; 0 vulnerabilities.
-- `npm run typecheck` — passed.
-- `npm run lint` — passed.
-- `npm test` — 2/2 Node tests passed.
-- `npm run build` — passed; created `dist/index.html` and copied the static
-  deployment policy into `dist/staticwebapp.config.json`.
-- `npm run test:browser` — 9/9 Chromium tests passed, including every exact
-  command in `.factory/claims.json` plus desktop and 390px mobile axe scans,
-  visible keyboard skip-link/focus behavior, no horizontal mobile overflow,
-  404 routing, real-pack IndexedDB restoration, same-origin demo requests,
-  and offline demo reload after service-worker activation.
-- `npm audit --omit=dev --audit-level=high` — `found 0 vulnerabilities`.
-- `git diff --check` — passed.
+## Defects and next steps
 
-The repository does not contain the requested worker `verify-url.sh`; the
-Playwright browser suite performs its title/lang/main/alt/console-equivalent
-checks and uses `@axe-core/playwright` with zero violations at both sizes.
-Initial application JS is 6.87 KB gzip, CSS is 3.29 KB gzip, deferred PDF JS
-is 128.91 KB gzip, and the social/hero assets are below the stated budgets.
+1. **Critical:** allow the local Tesseract blob flow in production CSP; prove
+   image and PDF OCR, correction, citation, export, and refresh recovery on
+   the deployed site.
+2. **High:** correct service-worker route lookup for `/privacy/` and
+   `/terms/`, and retain real missing-route HTTP 404s after SW activation.
+3. **Medium:** make the update toast operable before a worker takes control;
+   current upgrade simulation auto-reloads before it can be used.
+4. **Medium:** add claim entries/tests for all other public measurable
+   promises, especially real-OCR privacy/offline behavior and tier limits.
 
-## Deployment
-
-Deployed production `dist/` with the factory static deployment helper on
-2026-08-28. Azure deployment ID: `d8628387-db87-4bbb-959e-5f738d832b17`.
-The live app is https://scan-to-study-pack.sociobot.in and the Azure host is
-https://mango-forest-002717810.7.azurestaticapps.net.
-
-Live checks after deployment: `/demo` returns 200 and the repaired title;
-`/no-such-route` returns the designed `404` response; root responses include
-the configured CSP, Permissions-Policy and X-Frame-Options; hashed JS assets
-return `Cache-Control: public, max-age=31536000, immutable`.
-
-## Known limits
-
-- English is the bundled OCR language. Handwriting, complex columns, and poor
-  scans still require proofreading.
-- The free range limit and optional Sociobot purchase behavior are unchanged.
-  The optional checkout/verification endpoints require their live billing
-  service and were not invoked during the local privacy demo tests.
+The complete evidence, exact commands, severity assessment, deployment checks,
+and observed rate-limit result are in `.factory/verification-2.md`.
