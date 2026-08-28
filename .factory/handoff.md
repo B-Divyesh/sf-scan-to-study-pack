@@ -22,7 +22,9 @@
 - Added versioned service-worker cache names, old-cache cleanup, cache-first
   app-shell assets, `/demo` pre-caching, and an update toast path.
 - Added `staticwebapp.config.json` with CSP, frame/permissions/referrer policy,
-  immutable cache rules for hashed/static runtime assets, and an explicit 404.
+  immutable cache rules for hashed/static runtime assets, and an explicit HTTP
+  404. `/demo` is emitted as a real static route, so no SPA fallback masks a
+  missing route.
   Added robots, sitemap, canonical and social metadata, a 1200×630 original-art
   derived social card, and `public/404.html`.
 

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/build-sw.mjs && cp staticwebapp.config.json dist/staticwebapp.config.json",
+    "build": "tsc -b && vite build && mkdir -p dist/demo && cp dist/index.html dist/demo/index.html && node scripts/build-sw.mjs && cp staticwebapp.config.json dist/staticwebapp.config.json",
     "test": "node --test tests/*.test.mjs",
     "test:browser": "playwright test",
     "typecheck": "tsc --noEmit",
