@@ -66,9 +66,15 @@ is 128.91 KB gzip, and the social/hero assets are below the stated budgets.
 
 ## Deployment
 
-Push `main`; this static product deploys the committed `dist` build through the
-factory's configured static deployment. `staticwebapp.config.json` is included
-at the repository root for that deployment provider.
+Deployed production `dist/` with the factory static deployment helper on
+2026-08-28. Azure deployment ID: `d8628387-db87-4bbb-959e-5f738d832b17`.
+The live app is https://scan-to-study-pack.sociobot.in and the Azure host is
+https://mango-forest-002717810.7.azurestaticapps.net.
+
+Live checks after deployment: `/demo` returns 200 and the repaired title;
+`/no-such-route` returns the designed `404` response; root responses include
+the configured CSP, Permissions-Policy and X-Frame-Options; hashed JS assets
+return `Cache-Control: public, max-age=31536000, immutable`.
 
 ## Known limits
 
