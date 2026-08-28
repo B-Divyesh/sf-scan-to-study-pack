@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1160" viewBox="0 0 900 1160" role="img" aria-label="Sample scanned library note">
+  <rect width="900" height="1160" fill="#e7dcc8"/><rect x="54" y="52" width="792" height="1056" fill="#f6f1e5" stroke="#e95835" stroke-width="6"/>
+  <path d="M92 100h130m-130 22h70M716 100h92m-92 22h50" stroke="#e95835" stroke-width="6"/><circle cx="780" cy="176" r="34" fill="#9fe870" opacity=".8"/>
+  <g fill="#102027" font-family="Georgia,serif"><text x="112" y="220" font-size="38">History seminar</text><text x="112" y="274" font-size="22">Library note · 14 October</text><text x="112" y="374" font-size="30">The library closes at nine.</text><text x="112" y="428" font-size="30">Bring the primary source notes</text><text x="112" y="482" font-size="30">to the seminar.</text><text x="112" y="620" font-size="30">The archive copy has a torn</text><text x="112" y="674" font-size="30">lower margin, so check the</text><text x="112" y="728" font-size="30">final date against the source</text><text x="112" y="782" font-size="30">page before quoting it.</text></g>
+  <path d="M112 822h590" stroke="#e95835" stroke-width="5" stroke-dasharray="9 11"/><text x="112" y="906" fill="#46555a" font-family="ui-monospace,monospace" font-size="20">sample source / page 1</text>
+</svg>

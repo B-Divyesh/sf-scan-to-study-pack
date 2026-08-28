@@ -1,55 +1,53 @@
 # Scan to Study Pack
 
-Scan to Study Pack is an offline-first study utility for students and
-independent readers working with legitimately obtained scanned PDFs. It renders
-selected pages in your browser, runs local OCR, lets you correct the result,
-and exports a citeable Markdown or HTML study pack with stable page anchors.
+Turn scanned pages into editable study packs with source-page citations. It is
+for students and independent readers working with material they may process.
 
-No document is sent to an AI service or application server. The included
-English OCR data is about 11 MB and is cached for offline use after the first
-load. OCR is imperfect: check amber confidence flags and verify quotations
-against the original scan.
+Start at `/demo` or use **Try it with sample data**. The demo immediately
+loads a short history-seminar note with an amber block to proofread. It uses
+the separate `scan-study-pack-demo-v1` IndexedDB database and never reads or
+writes real packs. See `.factory/demo.md` for reset and storage details.
 
-## Run locally
+## Run, test, and build
 
 Requires Node 22+.
 
 ```bash
-npm install
-npm run dev
-```
-
-## Verify and build
-
-```bash
+npm ci
+npm run typecheck
+npm run lint
 npm test
 npm run build
-npm run preview
+npm run test:browser
 ```
 
-The deployable static site is written to `dist/`, with `index.html` at its
-root. `npm run build` also generates the versioned precache manifest in the
-service worker.
+The static deployment artifact is `dist/`, with `index.html` at its root.
+Preview it locally with `npm run preview`.
 
-## Using it
+## Use with your own material
 
-1. Choose a PDF, PNG, JPEG, or WebP you are permitted to process.
-2. Select a page range and run local OCR. The free tier handles the first ten
-   selected pages; all exports remain free. The optional $12 one-time Study
-   Pass removes that range limit.
-3. Review any low-confidence page, correct text directly, then export Markdown,
-   HTML, or a JSON backup.
+1. Choose a PDF, PNG, JPEG, or WebP you have the right to process.
+2. Pick pages and run the bundled English OCR engine in the browser.
+3. Review amber confidence blocks, correct text, and export Markdown, HTML, or
+   a JSON backup.
 
-Recovered text is saved in browser IndexedDB to survive refreshes. Clear site
-data to remove it; export JSON first if you want a backup. See `/privacy/` and
-`/terms/` for details.
+The free tier processes up to ten selected pages at once. A $12 one-time Study
+Pass removes that limit; exports remain free. The optional license check calls
+Sociobot only after you paste or return with a license.
 
-## Technical notes
+The app keeps the current real pack in browser IndexedDB and restores it after
+a refresh. Source files are not retained after the tab session, but rendered
+page previews included in a recovered pack can remain in its local record.
+Clear site data to remove local records; export JSON first if you want a copy.
 
-The initial application bundle is small; PDF rendering and OCR are loaded only
-after a source is selected. Tesseract language/core files are packaged locally
-under `public/ocr` and `public/tessdata`; no runtime OCR CDN is used.
+## Privacy and offline use
 
-The original hero illustration was generated with the factory Azure image model.
-Its prompt and provenance are recorded in `.factory/design.md` and the sidecar
-at `assets/hero-reading-signal.png.json`.
+OCR code, language data, PDF worker, and the app shell ship with the site. A
+visited demo can reload offline. There are no analytics or third-party OCR
+scripts. See `/privacy/` and `/terms/` for the full policies.
+
+## Claims and provenance
+
+Every public, testable promise is listed in `.factory/claims.json` with its
+exact browser regression command. The original illustration and the derived
+social card are documented in `.factory/design.md`.

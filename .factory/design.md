@@ -46,6 +46,8 @@ material. It is an atmospheric explanation of page-to-text alignment, not a
 claim that OCR is magical. Generated with the factory Azure image model on
 2026-08-28 from the prompt recorded in `assets/hero-reading-signal.json`.
 The delivered WebP is optimized below 300 KB; all UI symbols are authored SVG.
+`public/social-preview.jpg` is a 1200×630 crop derived from that original hero
+for Open Graph and Twitter cards; it introduces no new imagery.
 
 **Prompt sheet:** subject: recovered page signal; world: quiet demoscene
 reading lab; materials: recycled paper, phosphor pixels, subtle CRT texture;

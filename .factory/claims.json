@@ -1,0 +1,9 @@
+[
+  {"id":"demo-sample","claim":"Try a sample study pack without saving to your real data","where":"landing action, demo banner","test":"npm run test:browser -- --grep @claim:demo-sample","sandbox":"fresh browser context; open the one-click demo and inspect its isolated IndexedDB database"},
+  {"id":"local-storage","claim":"Recovered real packs restore after refresh","where":"README","test":"npm run test:browser -- --grep @claim:local-storage","sandbox":"fresh browser context; write a recovered pack to real IndexedDB, reload, and inspect the editor"},
+  {"id":"exports","claim":"Exports Markdown, HTML, and JSON study packs","where":"study pack controls, README","test":"npm run test:browser -- --grep @claim:exports","sandbox":"fresh demo; download each format and inspect its content"},
+  {"id":"page-citations","claim":"Exports keep page anchors and source-page citations","where":"study pack controls, README","test":"npm run test:browser -- --grep @claim:page-citations","sandbox":"fresh demo; inspect the Markdown download"},
+  {"id":"local-processing","claim":"The demo makes no cross-origin requests","where":"landing, privacy, README","test":"npm run test:browser -- --grep @claim:local-processing","sandbox":"fresh demo; record every browser request"},
+  {"id":"study-pass","claim":"The optional Study Pass costs $12 and links to Sociobot checkout","where":"Study Pass panel, README","test":"npm run test:browser -- --grep @claim:study-pass","sandbox":"fresh demo; verify the exact price and checkout URL"},
+  {"id":"offline-demo","claim":"A visited demo reloads offline","where":"README","test":"npm run test:browser -- --grep @claim:offline-demo","sandbox":"fresh demo; wait for service worker, set browser offline, reload"}
+]
